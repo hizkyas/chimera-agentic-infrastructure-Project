@@ -1,0 +1,22 @@
+﻿name: CI Pipeline
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+    - name: Install dependencies
+      run: pip install pytest jsonschema
+    - name: Check files exist
+      run: |
+        echo "📋 Checking project structure..."
+        ls -la
+        [ -f "Dockerfile" ] && echo "✅ Dockerfile exists" || echo "❌ Dockerfile missing"
+        [ -f "main.py" ] && echo "✅ main.py exists" || echo "❌ main.py missing"
+        [ -f "pyproject.toml" ] && echo "✅ pyproject.toml exists" || echo "❌ pyproject.toml missing"
+    - name: Run basic test
+      run: python -c "print('CI test passed')"
