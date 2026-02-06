@@ -20,3 +20,5 @@ jobs:
         [ -f "pyproject.toml" ] && echo "✅ pyproject.toml exists" || echo "❌ pyproject.toml missing"
     - name: Run basic test
       run: python -c "print('CI test passed')"
+
+
